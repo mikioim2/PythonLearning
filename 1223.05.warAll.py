@@ -32,7 +32,7 @@ class Card:
                 return False
         return False
 
-    def __repr__(self):
+    def __str__(self):
         v = self.values[self.value] + " of "\
             + self.suits[self.suit]
         return v
@@ -65,15 +65,8 @@ class Game:
         self.p2 = Player(name2)
 
     def wins(self,winner):
-        w = "このラウンドは{}が勝ちました"
-        w = w.format(winner)
-        print(w)
-
-    def draw(self, p1n, p1c,p2n, p2c):
-        d = "{}は{}、{}は{}を引きました"
-        d = d.format(p1n,p1c,p2n,p2c)
-        print(d)
-
+        print(f"このラウンドは{winner}が勝ちました")
+        
     def play_game(self):
         cards = self.deck.cards
         print("戦争を始めます")
@@ -83,10 +76,10 @@ class Game:
             if response == 'q':
                 break
             p1c = self.deck.rm_card()
-            p2c = self.deck.rm_caed()
+            p2c = self.deck.rm_card()
             p1n = self.p1.name
             p2n = self.p2.name
-            self.draw(p1n,p1c,p2n,p2c)
+            print(f"{p1n}は{p1c}、{p2n}は{p2c}を引きました")
             if p1c > p2c:
                 self.p1.wins += 1
                 self.wins(self.p1.name)
@@ -100,7 +93,7 @@ class Game:
     def winner(self,p1,p2):
         if p1.wins > p2.wins:
             return p1.name
-        if p1.wins < p2wins:
+        if p1.wins < p2.wins:
             return p2.name
         return "引き分け"
 
